@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Deepgram Workshop</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700');
+
+        body {
+            background: #141E29;
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            padding: 1em;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        p {
+            font-size: 1.25em;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <p></p>
+    <script>
+        const DG_ENDPOINT = 'wss://api.deepgram.com/v1/listen'
+
+        navigator.mediaDevices.getUserMedia({audio:true}).then(stream => {
+            const mediaRecorder = new MediaRecorder(stream, { mimeType : "audio/webm" })
+            const socket = new WebSocket(DG_ENDPOINT , ["token", "8b74a01f7fe16e2013ac1378a4319179bd266240"])
+            socket.onopen = () => {
+                mediaRecorder.addEventListener("dataavailable", event => {
+                    socket.send(event.data);
+                })
+                mediaRecorder.start(100000)
+            }
+
+            socket.onmessage = message => {
+                const data = JSON.parse(message.data);
+                console.log(data)
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>
