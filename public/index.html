@@ -26,6 +26,9 @@
 </head>
 
 <body>
+    <form action="/prerecorded" method="GET">
+        <button type="submit">Get transcription for the recording</button>
+    </form>
     <p></p>
     <script>
         const DG_ENDPOINT = 'wss://api.deepgram.com/v1/listen?language=en-IN'
@@ -41,7 +44,6 @@
                 })
                 mediaRecorder.start(250);
             }
-
             socket.onmessage = message => {
                 const data = JSON.parse(message.data);
                 // console.log(data)
@@ -53,7 +55,6 @@
             }
 
         })
-
     </script>
 </body>
 

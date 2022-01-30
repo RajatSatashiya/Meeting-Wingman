@@ -12,8 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "@deepgram/sdk": "^1.2.0",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "twilio": "^3.73.1"
   }
 }

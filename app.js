@@ -2,47 +2,30 @@
 require("dotenv").config();
 
 //imports
-const fs = require("fs");
+const mongoose = require("mongoose");
 const express = require("express");
-// const { Deepgram } = require("@deepgram/sdk");
 
-// const deepgram = new Deepgram(process.env.DG_KEY);
-// const audioURL =
-//   "https://static.deepgram.com/examples/deep-learning-podcast-clip.wav";
-
-// const audio = "deep-learning-podcast-clip.wav";
-// const audioBuffer = fs.readFileSync(audio);
-
-// var trans;
-// deepgram.transcription
-//   .preRecorded({ url: audioURL }, { punctuate: true })
-//   //   .preRecorded(
-//   //     {
-//   //       buffer: audioBuffer,
-//   //       mimetype: "audio/wav",
-//   //     },
-//   //     {
-//   //       punctuate: true,
-//   //     }
-//   //   )
-//   .then((data) => {
-//     // console.dir(data, { depth: null });
-//     // console.log(data.results.channels[0];
-//     var transcript = data.results.channels[0].alternatives[0].transcript;
-//     trans = transcript;
-//   })
-//   .catch((e) => {
-//     console.log("Error " + e);
-//   });
-
+//create the server
 const app = express();
-// app.get("/", (req, res) => {
-//   res.send(trans);
-// });
 app.use(express.static("public"));
+app.use(express.json());
 
+//mongoose
+mongoose.connect(process.env.MONGODB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+//routes
+app.get("/", (req, res) => {
+  res.send("hello");
+});
 app.use("/whatsapp", require("./routes/whatsapp.js"));
+app.use("/prerecorded", require("./routes/prerecorded.js"));
+app.use("/login", require("./routes/login"));
+app.use("/signup", require("./routes/signup"));
 
+//start the server
 var port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`listening at port ${port}`);
