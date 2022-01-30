@@ -1,9 +1,12 @@
 const router = require("express").Router();
 const client = require("twilio")();
 
-router.get("/send", (req, res) => {
+router.post("/send", (req, res) => {
   const { sender } = req.body;
   console.log(sender);
+  res.json({
+    name: "jetha",
+  });
   // client.messages
   //   .create({
   //     body: `Your name was called during the meeting at 11:52AM ${sender}`,

@@ -42,13 +42,28 @@
                 </button>
             </div>
             <div class="nav-items">
-                
+                <li>Login</li>
+                <li>Signup</li>
             </div>
         </div>
     </nav>
-    <form action="/prerecorded" method="GET">
-        <button type="submit" class="btn">Get transcription for the recording</button>
+
+    <h1>Welcome to MEETING WINGMAN</h1>
+
+    Please enter your name and keyword!!!
+    <form>
+        <label>Name:</label>
+        <input type="text" name="name">
+        <br>
+
+        <label>Keyword: </label>
+        <input type="text" name="keyword">
+
+        <button type="submit">Submit</button>
     </form>
+    <!-- <form action="/prerecorded" method="GET">
+        <button type="submit" class="btn">Get transcription for the recording</button>
+    </form> -->
 
     <p></p>
     <script>
@@ -73,7 +88,7 @@
                 
                 if(transcript.includes(keyword)){
                     alert(keyword + "please come for your attendance");
-
+                    alertWhatsapp(keyword);
                 }
                 if(transcript && is_final){
                     document.querySelector("p").innerHTML += " " + transcript + "<br>"
@@ -83,8 +98,18 @@
 
         })
 
-        const alertWhatsapp = () => {
-            console.log("asd")
+        const alertWhatsapp = async (name) => {
+            const res = await fetch("/whatsapp/send", {
+                method: "POST",
+                body: JSON.stringify({
+                    sender: name
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const data = await res.json();
+            console.log(data);
         }
     </script>
 </body>

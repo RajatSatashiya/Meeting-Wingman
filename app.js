@@ -4,9 +4,11 @@ require("dotenv").config();
 //imports
 const mongoose = require("mongoose");
 const express = require("express");
+const cors = require("cors");
 
 //create the server
 const app = express();
+app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
 
