@@ -50,16 +50,24 @@
 
     <h1>Welcome to MEETING WINGMAN</h1>
 
-    Please enter your name and keyword!!!
-    <form>
+    <form class="theform">
+        Please enter your name and keyword!!!
         <label>Name:</label>
-        <input type="text" name="name">
+        <br>
+        <input type="text" id="name" name="name">
+        <br>
+
+        <label>Ph. No.: </label>
+        <br>
+        <input type="text" id="phone" name="phone">
         <br>
 
         <label>Keyword: </label>
-        <input type="text" name="keyword">
+        <br>
+        <input type="text" id="keyword" name="keyword">
+        <br>
 
-        <button type="submit">Submit</button>
+        <button type="submit" onclick="savecred(event)">Submit</button>
     </form>
     <!-- <form action="/prerecorded" method="GET">
         <button type="submit" class="btn">Get transcription for the recording</button>
@@ -67,7 +75,14 @@
 
     <p></p>
     <script>
-        const keyword = prompt("Enter your name");
+        var keyword, phone, name;
+        const savecred = (e) => {
+            e.preventDefault()
+            phone = document.getElementById("phone").value;
+            name = document.getElementById("name").value;
+            keyword = document.getElementById("keyword").value;
+        }
+        // const keyword = prompt("Enter your name");
         const DG_ENDPOINT = 'wss://api.deepgram.com/v1/listen'
 
         navigator.mediaDevices.getUserMedia({audio:true}).then(stream => {
@@ -86,9 +101,8 @@
                 const is_final = data.is_final
                 const transcript = data.channel.alternatives[0].transcript
                 
-                if(transcript.includes(keyword)){
-                    alert(keyword + "please come for your attendance");
-                    alertWhatsapp(keyword);
+                if(transcript.includes(keyword) || transcript.includes(name)){
+                    alertWhatsapp(name, keyword, phone);
                 }
                 if(transcript && is_final){
                     document.querySelector("p").innerHTML += " " + transcript + "<br>"
@@ -98,11 +112,13 @@
 
         })
 
-        const alertWhatsapp = async (name) => {
+        const alertWhatsapp = async (name, keyword, phone) => {
             const res = await fetch("/whatsapp/send", {
                 method: "POST",
                 body: JSON.stringify({
-                    sender: name
+                    name,
+                    keyword,
+                    phone
                 }),
                 headers: {
                     "Content-Type": "application/json",
