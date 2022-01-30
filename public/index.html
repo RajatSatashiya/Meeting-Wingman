@@ -23,15 +23,37 @@
             line-height: 1.5;
         }
     </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <nav>
+        <div class="nav-bar">
+            <div class="nav-header">
+                <div>
+                    <h2 class="heading">
+                        <a href="/">
+                            <img src="Entransparent.png" class="teamlogo" alt="enpassant's logo"></img>
+                        </a>
+                    </h2>
+                </div>
+                <button class="nav-toggle">
+                    <i class="fas fa-bars baricon"></i>
+                </button>
+            </div>
+            <div class="nav-items">
+                
+            </div>
+        </div>
+    </nav>
     <form action="/prerecorded" method="GET">
-        <button type="submit">Get transcription for the recording</button>
+        <button type="submit" class="btn">Get transcription for the recording</button>
     </form>
+
     <p></p>
     <script>
-        const DG_ENDPOINT = 'wss://api.deepgram.com/v1/listen?language=en-IN'
+        const keyword = prompt("Enter your name");
+        const DG_ENDPOINT = 'wss://api.deepgram.com/v1/listen'
 
         navigator.mediaDevices.getUserMedia({audio:true}).then(stream => {
             const mediaRecorder = new MediaRecorder(stream, { mimeType : "audio/webm" })
@@ -46,15 +68,24 @@
             }
             socket.onmessage = message => {
                 const data = JSON.parse(message.data);
-                // console.log(data)
                 const is_final = data.is_final
                 const transcript = data.channel.alternatives[0].transcript
+                
+                if(transcript.includes(keyword)){
+                    alert(keyword + "please come for your attendance");
+
+                }
                 if(transcript && is_final){
-                    document.querySelector("p").textContent += " " + transcript
+                    document.querySelector("p").innerHTML += " " + transcript + "<br>"
+
                 }
             }
 
         })
+
+        const alertWhatsapp = () => {
+            console.log("asd")
+        }
     </script>
 </body>
 

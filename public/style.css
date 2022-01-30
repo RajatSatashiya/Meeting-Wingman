@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&display=swap");
+
+:root {
+  --bg-clr-1: #353333;
+  --bg-clr-2: #35363a;
+  --bg-clr-3: #f1f5f8;
+  --bg-clr-4: #1a1a1d;
+  --bg-clr-5: #fccc47;
+  --bg-clr-6: #ee5743;
+  --bg-clr-7: hsl(210, 50%, 14%);
+  --bg-clr-8: #d2dbdc;
+  --german-red: #d60000;
+  --german-yellow: #f7c800;
+  --shadow-cyan-1: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px cyan;
+  --shadow-cyan-2: 0 0 5px #fff, 0 0 10px cyan, 0 0 20px cyan;
+  --shadow-cyan-3: 0 0 20px cyan, 0 0 30px cyan;
+  --shadow-red-1: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px red, 0 0 30px red;
+  --shadow-red-2: 0 0 20px red, 0 0 30px red;
+}
+
+body {
+  background: var(--bg-clr-2);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+a {
+  text-decoration: none;
+}
+.scroll-link {
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-weight: 400;
+  color: black;
+}
+.hide {
+  visibility: hidden;
+}
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #dadada;
+  background: transparent;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem 5rem 0rem 5rem;
+  z-index: 100;
+}
+.fa-bars,
+.fa-times {
+  font-size: 1.7rem;
+  color: white;
+  background: black;
+  padding: 0.7rem;
+  border-radius: 30%;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+.fa-bars:hover,
+.fa-times:hover {
+  color: black;
+  background: #ffbd4a;
+}
+.heading {
+  font-family: Bebas Neue;
+  font-size: 3.625rem;
+  font-style: italic;
+}
+.nav-items li {
+  margin-right: 1.5rem;
+  list-style-type: none;
+  font-size: 1.2rem;
+  float: left;
+}
+.nav-items li a:hover {
+  font-weight: 500;
+}
+.nav-toggle {
+  display: none;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.teamlogo {
+  width: 16rem;
+}
+.hide {
+  width: 5.025rem;
+  /* visibility: hidden; */
+}
+.college {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 100;
+}
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  padding: 13px;
+  font-family: Montserrat;
+  font-weight: 500;
+  background: #c63848;
+  background: #526f9e;
+  background: black;
+  color: white;
+  margin: 10px 0;
+}
+.btn:hover {
+  background: #ffbd4a;
+  color: black;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+/****** Responsive - Mobile  ******/
+@media screen and (max-width: 650px) {
+  html {
+    font-size: 12px;
+  }
+  .text {
+    width: 85%;
+    font-size: 1.388rem;
+  }
+  .nav-bar {
+    margin: 0;
+    display: block;
+    padding: 0 2rem;
+  }
+  .hide {
+    visibility: hidden;
+  }
+  .nav-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-toggle {
+    display: block;
+    font-size: 1.5rem;
+    color: black;
+    background: transparent;
+    border-color: transparent;
+    cursor: pointer;
+    outline: none;
+  }
+  .nav-items {
+    height: 0;
+    overflow: hidden;
+    font-weight: 300;
+    transition: all 0.3s linear;
+    display: block;
+  }
+  .nav-items li {
+    float: none;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+  .show-items {
+    margin-bottom: 1.5rem;
+  }
+}
